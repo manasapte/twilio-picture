@@ -1,19 +1,12 @@
 from flask import Flask, render_template, request, Response, session, abort, jsonify
-from socketio_namespaces import PlayersNamespace
-from socketio import socketio_manage
 import json
-import redis
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-@app.route('/tetris')
+@app.route('/twipic')
 def index():
-    return render_template('tetris.html') 
+    return render_template('picture.html') 
 
-@app.route('/game',methods=['GET'])
-def game():
-  print('hello called')
-  return Response(render_template('login.xml',mimetype='text/xml'))
-
-
+if __name__ == "__main__":
+    app.run(host="0.0.0.0",port=8000)
