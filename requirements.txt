@@ -7,3 +7,4 @@ distribute==0.6.40
 greenlet==0.4.1
 virtualenv==1.8.4
 wsgiref==0.1.2
+redis==2.8.0
