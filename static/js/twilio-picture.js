@@ -7,9 +7,11 @@ $(document).ready(function() {
   $("#tetris-play").click(
     if($('#twipic-name').val().trim() == '') {
       $('#error-name).show();
-    }
-    
+      return;
+    } 
+    $('#myModal').modal('hide');
   );
+  
 });
 
 

@@ -13,6 +13,17 @@
 <body>
 <div class="panel">
 Welcome to twipic!
+  <div class="input-group">
+    <div class="form-group">
+      <label class="control-label" for="twipic-name">Enter the code you received:</label>
+      <input type="text" id='twipic-code' placeholder='Code'>
+    </div>
+    <button type="button" id="tetris-play" class="btn btn-sm btn-primary" data-loading-text="waiting for your call...">Play!</button>
+  </div>
+  <div id="twipic-takepic">
+    <input id="twipic-camera" type="file" accept="image/*;capture=camera">
+  </div>
+
 </div>
 <!-- Modal -->
   <div class="modal fade" id="myModal">
