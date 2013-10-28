@@ -4,13 +4,14 @@ $(document).ready(function() {
   });
   $('#myModal').modal();
   $('#error-name, #error-phone').hide();
-  $("#tetris-play").click(
-    if($('#twipic-name').val().trim() == '') {
-      $('#error-name).show();
+  $("#twipic-play").click(function(){
+    console.log('here');
+    if($('#twipic-name').val().trim() == ''){
+      $('#error-name').show();
       return;
-    } 
+    }
     $('#myModal').modal('hide');
-  );
+  });
   
 });
 

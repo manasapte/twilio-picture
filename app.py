@@ -11,9 +11,9 @@ r = redis.StrictRedis(host='localhost',port=6379,db=0)
 def index():
     return render_template('picture.html') 
 
-@app.route('/call')
-def call():
-  
+@app.route('/text')
+def text():
+  id = r.incr('sessionid')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=8000)
