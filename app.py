@@ -19,14 +19,16 @@ def index():
 
 @app.route('/send',methods=['POST'])
 def send():
-  img = request.form.get('base64img')
+  imgData = request.form.get('base64img')
+  imgData += "==="
+  print "img data decoded: "+str(imgData.decode('base64'))
   ph = request.form.get('phone')
   print "request phone: "+ph
   code = request.form.get('code')
   print "request code: "+code
   print "from redis: "+r.get(ph)
   if r.get(ph) == code:
-    fh = open("/static/"+str(ph)+".png", "wb")
+    fh = open("static/"+str(ph)+".png", "wb")
     fh.write(imgData.decode('base64'))
     fh.close()
     #send MMS
@@ -42,7 +44,7 @@ def text():
   sms = client.sms.messages.create(body="Enter the following code on the site:"+str(id),
     to=ph,
     from_="+19252320999")
-  return json.dumps({'phone':ph}) 
+  return jsonify({'phone':ph}) 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=8000)

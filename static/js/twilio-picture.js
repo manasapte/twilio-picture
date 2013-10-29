@@ -1,3 +1,4 @@
+debug = ''
 $(document).ready(function() {
   $('#closemodal').click(function(){
     $('#myModal').modal('hide'); 
@@ -40,9 +41,8 @@ $(document).ready(function() {
     }
     $.post( "/text", {name:$('#twipic-name').val(),phone:$('#twipic-phone').val()},function( data ) {
       $('#myModal').modal('hide');
-      console.log("data after success: "+data);
-      $('#twipic-hphone').val(data['phone'])
-      console.log("data phone is: "+data['phone']);
+      console.log("data after success: "+data+ " and phone: "+data.phone);
+      $('#twipic-hphone').val(data.phone)
     });
   });
  
