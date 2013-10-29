@@ -24,8 +24,8 @@ def text():
   r.set(ph,id)
   sms = client.sms.messages.create(body="Enter the following code on the site:"+str(id),
     to="+16786444097",
-    from_="+19252320999")  
-  
+    from_="+19252320999")
+  return json.dumps({'phone':ph}) 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",port=8000)
