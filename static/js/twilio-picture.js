@@ -10,7 +10,11 @@ $(document).ready(function() {
       $('#error-name').show();
       return;
     }
-    $('#myModal').modal('hide');
+    //$.post( "/text", {name:$('#twipic-name').val(),phone:$('#twipic-phone').val()},function( data ) {
+    $.post( "/text", {name:'stuff'},function( data ) {
+      $('#myModal').modal('hide');
+      console.log("data after success: "+data);
+    });
   });
   
 });
