@@ -19,10 +19,15 @@ Welcome to twipic!
       <input type="text" id='twipic-code' placeholder='Code'>
     </div>
   </div>
-  <div id="twipic-takepic">
+  <div id="twipic-takepic" class="form-group">
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap">Snap Photo</button>
     <canvas id="canvas" width="640" height="480"></canvas>
+  </div>
+  
+  <div class="form-group">
+    <button id="twipic-send">Send!</button>
+    <input type="hidden" id="twipic-hphone" />
   </div>
 
 </div>
@@ -41,7 +46,7 @@ Welcome to twipic!
               <input type="text" id='twipic-name' placeholder='Name'>
               <label class="control-label" id="error-name">Enter a valid name</label>
             </div>
-            <div class="form-groupi has-error">
+            <div class="form-group has-error">
               <label class="control-label" for="twipic-phone">Enter your phone number:</label>
               <input type="text" id='twipic-phone' placeholder='###-###-####'>
               <label class="control-label" id="error-phone">Enter a valid phone number</label>

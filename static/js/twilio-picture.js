@@ -2,6 +2,7 @@ $(document).ready(function() {
   $('#closemodal').click(function(){
     $('#myModal').modal('hide'); 
   });
+  
   // Grab elements, create settings, etc.
   var canvas = $("#canvas")[0]
   context = canvas.getContext("2d")
@@ -27,7 +28,7 @@ $(document).ready(function() {
 
   $("#snap").click(function() {
     context.drawImage(video, 0, 0, 640, 480);
-  });
+  }); 
 
   $('#myModal').modal();
   $('#error-name, #error-phone').hide();
@@ -37,12 +38,19 @@ $(document).ready(function() {
       $('#error-name').show();
       return;
     }
-    //$.post( "/text", {name:$('#twipic-name').val(),phone:$('#twipic-phone').val()},function( data ) {
-    $.post( "/text", {name:'stuff'},function( data ) {
+    $.post( "/text", {name:$('#twipic-name').val(),phone:$('#twipic-phone').val()},function( data ) {
       $('#myModal').modal('hide');
       console.log("data after success: "+data);
+      $('#twipic-hphone').val(data['phone'])
+      console.log("data phone is: "+data['phone']);
     });
   });
+ 
+  $('#twipic-send').click( function(){
+    myImage = canvas.toDataURL();     
+    $.post('/send',{base64img:myImage,phone:$('#twipic-hphone').val(),code:$('#twipic-code').val()});
+  }); 
+  
   
 });
 

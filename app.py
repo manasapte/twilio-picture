@@ -17,13 +17,30 @@ client = TwilioRestClient(account_sid, auth_token)
 def index():
     return render_template('picture.html') 
 
+@app.route('/send',methods=['POST'])
+def send():
+  img = request.form.get('base64img')
+  ph = request.form.get('phone')
+  print "request phone: "+ph
+  code = request.form.get('code')
+  print "request code: "+code
+  print "from redis: "+r.get(ph)
+  if r.get(ph) == code:
+    fh = open("/static/"+str(ph)+".png", "wb")
+    fh.write(imgData.decode('base64'))
+    fh.close()
+    #send MMS
+    return json.dumps({'success':True}) 
+  return json.dumps({'success':False}) 
+
 @app.route('/text',methods=['POST'])
 def text():
   id = r.incr('sessionid')
+  print "form: "+str(request.form)
   ph = request.form.get('phone')  
   r.set(ph,id)
   sms = client.sms.messages.create(body="Enter the following code on the site:"+str(id),
-    to="+16786444097",
+    to=ph,
     from_="+19252320999")
   return json.dumps({'phone':ph}) 
 
