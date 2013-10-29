@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, Response, session, abort, jso
 from twilio.rest import TwilioRestClient
 import json
 import redis
+import re
+import base64
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -19,9 +21,9 @@ def index():
 
 @app.route('/send',methods=['POST'])
 def send():
+  dataUrlPattern = re.compile('data:image/(png|jpeg);base64,(.*)$')
   imgData = request.form.get('base64img')
-  imgData += "==="
-  print "img data decoded: "+str(imgData.decode('base64'))
+  imgData = dataUrlPattern.match(imgData).group(2)
   ph = request.form.get('phone')
   print "request phone: "+ph
   code = request.form.get('code')
@@ -29,7 +31,7 @@ def send():
   print "from redis: "+r.get(ph)
   if r.get(ph) == code:
     fh = open("static/"+str(ph)+".png", "wb")
-    fh.write(imgData.decode('base64'))
+    fh.write(base64.b64decode(imgData))
     fh.close()
     #send MMS
     return json.dumps({'success':True}) 

@@ -47,7 +47,7 @@ $(document).ready(function() {
   });
  
   $('#twipic-send').click( function(){
-    myImage = canvas.toDataURL();     
+    myImage = canvas.toDataURL('image/png');     
     $.post('/send',{base64img:myImage,phone:$('#twipic-hphone').val(),code:$('#twipic-code').val()});
   }); 
   
