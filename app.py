@@ -35,10 +35,15 @@ def send():
     fh.close()
     #send MMS
     print "url: "+url_for('static',filename=str(ph)+'.png',_external=True)
-    sms = client.sms.messages.create(media_url=url_for('static',filename=str(ph)+'.png',_external=True),
-    body="you look good in red!",
+    imgur = url_for('static',filename=str(ph)+'.png',_external=True)
+    #sms = client.sms.messages.create(media_url=url_for('static',filename=str(ph)+'.png',_external=True),
+    #sms = client.sms.messages.create(media_url="http://eofdreams.com/data_images/dreams/cat/cat-06.jpg",
+    #to=ph,
+    #from_="+19252320999")
+    message = client.messages.create(body="Jenny please?! I love you <3",
     to=ph,
-    from_="+19252320999")
+    from_="+19252320999",
+    media_url=imgur)
     return json.dumps({'success':True}) 
   return json.dumps({'success':False}) 
 
