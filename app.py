@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response, session, abort, jsonify
+from flask import Flask, render_template, request, Response, session, abort, jsonify, url_for
 from twilio.rest import TwilioRestClient
 import json
 import redis
@@ -34,6 +34,10 @@ def send():
     fh.write(base64.b64decode(imgData))
     fh.close()
     #send MMS
+    sms = client.sms.messages.create(media_url=url_for('static',filename=str(ph)+'.png'),
+    body="you look good in red!",
+    to=ph,
+    from_="+19252320999")
     return json.dumps({'success':True}) 
   return json.dumps({'success':False}) 
 
