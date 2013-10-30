@@ -34,7 +34,8 @@ def send():
     fh.write(base64.b64decode(imgData))
     fh.close()
     #send MMS
-    sms = client.sms.messages.create(media_url=url_for('static',filename=str(ph)+'.png'),
+    print "url: "+url_for('static',filename=str(ph)+'.png',_external=True)
+    sms = client.sms.messages.create(media_url=url_for('static',filename=str(ph)+'.png',_external=True),
     body="you look good in red!",
     to=ph,
     from_="+19252320999")
